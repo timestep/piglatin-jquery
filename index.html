@@ -3,6 +3,7 @@
  <head>
   <meta charset="utf-8"/>
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/sugar/1.3.9/sugar.min.js"></script>
   <title>PigLatin Converter</title>
 </head>
 
@@ -15,15 +16,28 @@
 	<script>
 		
 		$('#button').click(function() {
-			word = $('#form').val().toLowerCase();
+			var word = $('#form').val().toLowerCase();
 			function piglatin(word){
 				word = word.split("");
 				
-				x = $.inArray(['a','e','i','o','u'],word); //determine vowel index number
+				// var x = word.findIndex(/[aeiou]/); //determine vowel index number
+
+				vowels=['a','e','i','o','u'];
+				var x = -1;
+				$.each(vowels,function(i,val){
+					console.log($.inArray(val,word));
+					console.log(word);
+					console.log(val);
+					if ($.inArray(val,word) != -1){
+						x = $.inArray(val,word);
+						console.log(x);
+						return false;
+					}
+				})
 
 				for (var i=0; i<x; i++){
-					goToEnd = word.shift();
-					word.push(goToEnd);
+					//goToEnd = word.shift();
+					word.push(word.shift());
 				}
 
 				answer = word.join('') + 'ay'; //join and add +ay
