@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <title>PigLatin Converter</title>
+</head>
+
+<body>
+  <h1>Pig Latin Converter</h1>
+  <h2>Type in the word.</h2>
+	<input id='form' type="text"></input>
+	<button id='button'>Convert!</button>
+	<p id='answer'>Answer Here.</p>
+	<script>
+		
+		$('#button').click(function() {
+			word = $('#form').val().toLowerCase();
+			function piglatin(word){
+				word = word.split("");
+				
+				x = $.inArray(['a','e','i','o','u'],word); //determine vowel index number
+
+				for (var i=0; i<x; i++){
+					goToEnd = word.shift();
+					word.push(goToEnd);
+				}
+
+				answer = word.join('') + 'ay'; //join and add +ay
+				return answer;
+			};
+
+		$('#answer').text(piglatin(word));
+		});
+	
+	</script>
+</body>
+</html>
